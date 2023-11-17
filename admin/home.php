@@ -25,7 +25,7 @@ if (!isset($_SESSION['loggedin'])) {
     </div>
 </nav>
 <div class="content">
-
+  
     <p>Bine ati revenit, <?=$_SESSION['name']?>!</p>
 </div>
 </body>
