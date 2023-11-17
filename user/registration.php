@@ -61,7 +61,7 @@ $stmt->bind_param('sss', $_POST['username'], $password,
     $_POST['email']);
 $stmt->execute();
 echo 'Success inregistrat!';
-header('Location: index.html');
+header('Location: home.php');
 } else {
 // Ceva nu este în regulă cu declarația sql, verificați pentru a vă asigura că tabelul conturilor //există cu toate cele 3 câmpuri.
 echo 'Nu se poate face prepare statement!';
