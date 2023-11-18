@@ -16,7 +16,7 @@ if ( mysqli_connect_errno() )
 if ( !isset($_POST['username'], $_POST['password']) )
 {
     // Nu s-au putut obține datele care ar fi trebuit trimise.
-    exit('Completati username si password !');
+    exit('Completati username si password in log in');
 }
 
 // Pregătiți SQL-ul nostru, pregătirea instrucțiunii SQL va împiedica injecțiaSQL.
@@ -35,18 +35,8 @@ if ($stmt = $conectare->prepare('SELECT id, password, isAdmin FROM users WHERE u
         // Notă: nu uitați să utilizați password_hash în fișierul de înregistrare pentru a stoca parolele hash.
         if (password_verify($_POST['password'], $password))
         {
-            // daca nu are rol de admin
-            if($isAdmin == 0) {
-                // Verification success! User has loggedin!
-                // Creați sesiuni, astfel încât să știm că utilizatorul este conectat, acestea acționează practic ca cookie-//uri, dar rețin datele de pe server.
-                session_regenerate_id();
-                $_SESSION['loggedin'] = TRUE;
-                $_SESSION['name'] = $_POST['username'];
-                $_SESSION['id'] = $id;
-                echo 'Bine ati venit user ' . $_SESSION['name'] . '!';
-                header('Location: userHome.php');
-            }else // daca are rol de admin
-            {
+            // daca  are rol de admin
+            if($isAdmin != 0) {
                 // Verification success! User has loggedin!
                 // Creați sesiuni, astfel încât să știm că utilizatorul este conectat, acestea acționează practic ca cookie-//uri, dar rețin datele de pe server.
                 session_regenerate_id();
@@ -55,6 +45,19 @@ if ($stmt = $conectare->prepare('SELECT id, password, isAdmin FROM users WHERE u
                 $_SESSION['id'] = $id;
                 echo 'Bine ati venit admin ' . $_SESSION['name'] . '!';
                 header('Location: adminHome.php');
+
+            } // daca nu are rol de admin
+            if($isAdmin == 0)
+            {
+                // Verification success! User has loggedin!
+                // Creați sesiuni, astfel încât să știm că utilizatorul este conectat, acestea acționează practic ca cookie-//uri, dar rețin datele de pe server.
+                session_regenerate_id();
+                $_SESSION['loggedin'] = TRUE;
+                $_SESSION['name'] = $_POST['username'];
+                $_SESSION['id'] = $id;
+                echo 'Bine ati venit user ' . $_SESSION['name'] . '!';
+                header('Location: userHome.php');
+
 
             }
         }

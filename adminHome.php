@@ -20,13 +20,22 @@ if (!isset($_SESSION['loggedin'])) {
 <nav class="navtop">
     <div>
         <h1>PST-EVENTS - admin</h1>
-        <a href="profile.php"><i class="fas fa-usercircle"></i>Profile</a>
+        <a href="userCRUD.html"><i class="fas fa-usercircle"></i>Users</a>
+        <a href="eventCRUD.html"><i class="fas fa-usercircle"></i>Events</a>
         <a href="logout.php"><i class="fas fa-sign-outalt"></i>Logout</a>
     </div>
 </nav>
 <div class="content">
   
     <p>Bine ati revenit, <?=$_SESSION['name']?>!</p>
+    <div class = "crud">
+        <h3>User:</h3>
+        <a>View</a>
+        <a>Insert</a>
+        <a>Delete</a>
+        <a>Update</a>
+    </div>
+
 </div>
 </body>
 </html>

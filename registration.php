@@ -15,7 +15,7 @@ if ( mysqli_connect_errno() ) {
 // isset verifica daca datele exista
 if (!isset($_POST['username'], $_POST['password'], $_POST['email'])) {
 // Nu s-au putut obține datele care ar fi trebuit trimise.
-exit('Complare formular registration !');
+exit('Completare formular registration !');
 }
 
 
