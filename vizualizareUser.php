@@ -62,7 +62,7 @@ if ($result = $mysqli->query("SELECT * FROM users ORDER BY id "))
 }
 // eroare in caz de insucces in interogare
 else
-{ echo "Error: " . $mysqli->error(); }
+{ echo "Error: " . $mysqli->error; }
 // se inchide
 $mysqli->close();
 ?>
