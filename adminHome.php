@@ -3,7 +3,7 @@
 session_start();
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
-    header('Location: index.php');
+    header('Location: login.php');
     exit;
 }
 ?>
@@ -20,8 +20,6 @@ if (!isset($_SESSION['loggedin'])) {
 <nav class="navtop">
     <div>
         <h1>PST-EVENTS - admin</h1>
-        <a href="userCRUD.html"><i class="fas fa-usercircle"></i>Users</a>
-        <a href="eventCRUD.html"><i class="fas fa-usercircle"></i>Events</a>
         <a href="logout.php"><i class="fas fa-sign-outalt"></i>Logout</a>
     </div>
 </nav>
@@ -29,11 +27,8 @@ if (!isset($_SESSION['loggedin'])) {
   
     <p>Bine ati revenit, <?=$_SESSION['name']?>!</p>
     <div class = "crud">
-        <h3>User:</h3>
-        <a>View</a>
-        <a>Insert</a>
-        <a>Delete</a>
-        <a>Update</a>
+        <p>Users : <a href="vizualizareUser.php">manage users here</a></p>
+
     </div>
 
 </div>
