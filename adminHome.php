@@ -21,6 +21,7 @@ if (!isset($_SESSION['loggedin'])) {
     <div>
         <h1>PST-EVENTS - admin</h1>
         <a href="logout.php"><i class="fas fa-sign-outalt"></i>Logout</a>
+        <a href="adminHome.php">Home</a>
     </div>
 </nav>
 <div class="content">
@@ -29,6 +30,7 @@ if (!isset($_SESSION['loggedin'])) {
     <div class = "crud">
         <p>Users : <a href="vizualizareUser.php">manage users here</a></p>
         <p>Tickets : <a href="vizualizareTichete.php">manage tickets here</a></p>
+        <p>Speakers : <a href="vizualizareSpeaker.php">manage speakers here</a></p>
 
     </div>
 

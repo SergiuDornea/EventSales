@@ -10,20 +10,19 @@ if (!empty($_POST['id']))
     if (is_numeric($_POST['id']))
     { // preluam variabilele din URL/form
         $ID = $_POST['id'];
-        $username = htmlentities($_POST['username'], ENT_QUOTES);
-        $password = htmlentities($_POST['password'], ENT_QUOTES);
-        $email = htmlentities($_POST['email'], ENT_QUOTES);
         $nume = htmlentities($_POST['nume'], ENT_QUOTES);
-        $isAdmin = htmlentities($_POST['isAdmin'], ENT_QUOTES);
+        $prenume = htmlentities($_POST['prenume'], ENT_QUOTES);
+        $descriere = htmlentities($_POST['descriere'], ENT_QUOTES);
+
 // verificam daca val nu sunt goale
-        if ($ID == '' || $username == '' || $password == '' || $email == '' || $nume == '' || $isAdmin == '')
+        if ($ID == '' || $nume == '' || $prenume == '' || $descriere == '')
         { // daca sunt goale afisam mesaj de eroare
             echo "<div> ERROR: Completati campurile obligatorii!</div>";
         }else
         { // daca nu sunt erori se face update name, code, image, price, descriere, categorie
-            if ($stmt = $mysqli->prepare("UPDATE users SET username=?, password=?, email=?, nume=?, isAdmin=?  WHERE ID='".$ID."'"))
+            if ($stmt = $mysqli->prepare("UPDATE speakers SET nume=?, prenume=?, descriere=?  WHERE ID='".$ID."'"))
             {
-                $stmt->bind_param("ssssi", $username, $password,$email, $nume,$isAdmin);
+                $stmt->bind_param("sss", $nume, $prenume,$descriere);
                 $stmt->execute();
                 $stmt->close();
             }// mesaj de eroare in caz ca nu se poate face update
@@ -46,18 +45,16 @@ if (!empty($_POST['id']))
         <?php if (isset($_GET['id']) && $_GET['id'] != '') { ?>
         <input type="hidden" name="id" value="<?php echo $_GET['id'];?>" />
         <p>ID: <?php echo isset($_GET['id']) ? $_GET['id'] : '';
-            if ($result = $mysqli->query("SELECT * FROM users where ID='".$_GET['id']."'"))
+            if ($result = $mysqli->query("SELECT * FROM speakers where ID='".$_GET['id']."'"))
             {
             if ($result->num_rows > 0)
             { $row = $result->fetch_object();?></p>
 
-        <strong>username: </strong> <input type="text" name="username" value="<?php echo$row->username;?>"/><br/>
-        <strong>password: </strong> <input type="text" name="password" value="<?php echo$row->password;?>"/><br/>
-        <strong>email: </strong> <input type="text" name="email" value="<?php echo$row->email;?>"/><br/>
         <strong>nume: </strong> <input type="text" name="nume" value="<?php echo$row->nume;?>"/><br/>
-        <strong>isAdmin (0 - Nu, 1-Da): </strong> <input type="text" name="nume" value="<?php echo$row->isAdmin;
-            }}}?>"/><br/>
+        <strong>prenume: </strong> <input type="text" name="prenume" value="<?php echo$row->prenume;?>"/><br/>
+        <strong>descriere: </strong> <input type="text" name="descriere" value="<?php echo$row->descriere;
+        }}}?>"/><br/>
         <br/>
         <input type="submit" name="submit" value="Submit" />
-        <a href="vizualizareUser.php">Index</a>
+        <a href="vizualizareSpeaker.php">Index</a>
     </div></form></body> </html>

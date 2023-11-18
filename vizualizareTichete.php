@@ -7,6 +7,13 @@
     </head>
 
     <body>
+    <nav class="navtop">
+        <div>
+            <h1>PST-EVENTS - admin</h1>
+            <a href="logout.php"><i class="fas fa-sign-outalt"></i>Logout</a>
+            <a href="adminHome.php">Home</a>
+        </div>
+    </nav>
         <h1>Inregistrarile din Tabela TICKETS</h1>
         <?php
         global $mysqli;
