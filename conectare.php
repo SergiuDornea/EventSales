@@ -14,8 +14,6 @@ if(mysqli_connect_errno())
 {
     echo 'Nu se poate conecta';
     exit();
-
-
 }
 
 ?>

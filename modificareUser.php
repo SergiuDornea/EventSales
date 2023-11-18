@@ -35,7 +35,8 @@ if (!empty($_POST['id']))
     else
     {echo "id incorect!";} }}?>
 <html> <head><title> <?php if ($_GET['id'] != '') { echo "Modificare inregistrare"; }?> </title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf8"/></head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
+    <link href="style.css" rel="stylesheet" type="text/css"></head>
 <body>
 <h1><?php if ($_GET['id'] != '') { echo "Modificare Inregistrare"; }?></h1>
 <?php if ($error != '') {
@@ -53,8 +54,9 @@ if (!empty($_POST['id']))
         <strong>username: </strong> <input type="text" name="username" value="<?php echo$row->username;?>"/><br/>
         <strong>password: </strong> <input type="text" name="password" value="<?php echo$row->password;?>"/><br/>
         <strong>email: </strong> <input type="text" name="email" value="<?php echo$row->email;?>"/><br/>
-        <strong>nume: </strong> <input type="text" name="nume" value="<?php echo$row->nume;
-        }}}?>"/><br/>
+        <strong>nume: </strong> <input type="text" name="nume" value="<?php echo$row->nume;?>"/><br/>
+        <strong>isAdmin (0 - Nu, 1-Da): </strong> <input type="text" name="nume" value="<?php echo$row->isAdmin;
+            }}}?>"/><br/>
         <br/>
         <input type="submit" name="submit" value="Submit" />
         <a href="vizualizareUser.php">Index</a>

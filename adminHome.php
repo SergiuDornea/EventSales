@@ -28,6 +28,7 @@ if (!isset($_SESSION['loggedin'])) {
     <p>Bine ati revenit, <?=$_SESSION['name']?>!</p>
     <div class = "crud">
         <p>Users : <a href="vizualizareUser.php">manage users here</a></p>
+        <p>Tickets : <a href="vizualizareTichete.php">manage tickets here</a></p>
 
     </div>
 
