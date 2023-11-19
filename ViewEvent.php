@@ -3,9 +3,9 @@ require_once "DBController.php";
 
 class ViewEvent extends DBController
 {
-    function getAllProduct()
+    function getAllProduct($table)
     {
-        $query = "SELECT * FROM events";
+        $query = "SELECT * FROM $table";
 
         $productResult = $this->getDBResult($query);
         return $productResult;
