@@ -1,4 +1,5 @@
 <?php // connectare bazadedate
+global $mysqli;
 include("Conectare.php");
 //Modificare datelor
 // se preia id din pagina vizualizare

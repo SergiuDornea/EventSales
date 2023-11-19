@@ -16,6 +16,7 @@
 <h1>Inregistrarile din tabela sponsori</h1>
 <p><b>Toate inregistrarile din sponsori</b</p><br>
 <?php
+global $mysqli;
 // connectare bazadedate
 include("Conectare.php");
 // se preiau inregistrarile din baza de date

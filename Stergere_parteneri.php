@@ -1,4 +1,5 @@
 <?php
+global $mysqli;
 // conectare la baza de date database
 include("Conectare.php");
 // se verifica daca id a fost primit

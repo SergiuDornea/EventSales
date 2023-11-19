@@ -1,4 +1,5 @@
 <?php
+global $mysqli;
 include("Conectare.php");
 $error='';
 
