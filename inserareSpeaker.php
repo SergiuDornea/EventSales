@@ -36,7 +36,8 @@ $mysqli->close();
 <html>
 <head> <title><?php echo "Inserare inregistrare"; ?> </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style.css">
 </head> <body>
 <h1><?php echo "Insereaza SPEAKER"; ?></h1>
 <?php if ($error != '') {

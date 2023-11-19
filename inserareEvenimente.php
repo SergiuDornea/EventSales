@@ -46,7 +46,11 @@ global $mysqli;
     function generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor) {
         // Generare HTML pentru pagina web
         $html = "<html>";
-        $html .= "<head><title>$titlu</title></head>";
+        $html .= "<head>";
+        $html .= "<meta name='viewport' content='width=device-width, initial-scale=1'>";
+        $html .= "<link rel='stylesheet' href='style.css'>";
+        $html .= "<title>$titlu</title>";
+        $html .= "</head>";
         $html .= "<body>";
         $html .= "<h1>$titlu</h1>";
         $html .= "<p>Descriere: $descriere</p>";
@@ -59,7 +63,7 @@ global $mysqli;
         $html .= "</html>";
     
         // Salveaza continutul in fisier (poti ajusta calea daca este necesar)
-        $filename = "eveniment_$id.html";
+        $filename = "eveniment_$id$titlu.html";
         file_put_contents($filename, $html);
     
         // Poti adauga si alte actiuni, cum ar fi redirectionarea catre pagina generata

@@ -35,7 +35,8 @@ if (!empty($_POST['id']))
     {echo "id incorect!";} }}?>
 <html> <head><title> <?php if ($_GET['id'] != '') { echo "Modificare inregistrare"; }?> </title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
-    <link href="style.css" rel="stylesheet" type="text/css"></head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style.css">
 <body>
 <h1><?php if ($_GET['id'] != '') { echo "Modificare Inregistrare"; }?></h1>
 <?php if ($error != '') {

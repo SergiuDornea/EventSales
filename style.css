@@ -3,3 +3,7 @@ body {
     flex-direction: column;
     align-items: center;
 }
+
+#despartitor{
+    width: 100%;
+}

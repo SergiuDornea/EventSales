@@ -12,7 +12,8 @@ if (!isset($_SESSION['loggedin'])) {
 <head>
     <meta charset="utf-8">
     <title>PST-EVENTS</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet"
           href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 </head>

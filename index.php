@@ -3,7 +3,7 @@ require_once "ViewEvent.php";?>
 <HTML>
 <HEAD>
     <TITLE>Evenimente</TITLE>
-    <link href="style.css" type="text/css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" href="style.css">
     <nav class="navtop">
         <div>
@@ -38,26 +38,28 @@ require_once "ViewEvent.php";?>
                     </div>
 <!--                // verifica daca exista un speaker atribuit pt id-ul eventului in tabela bookings-->
                 <?php
-                $speakerName = "";
-                if(! empty($bookings_array) ) {
+                $speakerlist = array();
+                if (!empty($bookings_array)) {
                     foreach ($bookings_array as $booking) {
                         if ($booking["ID_EVENT"] == $event["ID"]) {
-                            // Find the speaker information for the booked speaker
+                            // Find all speakers information for the booked speakers
                             foreach ($speakers_array as $speaker) {
                                 if ($speaker["ID"] == $booking["ID_SPEAKER"]) {
-                                    $speakerName = $speaker["nume"];
-                                    break;
+                                    array_push($speakerlist, $speaker["nume"]);
                                 }
                             }
-                            break;
                         }
                     }
                 }
                 ?>
-<!--                daca exista nume il afisam pe ecran-->
-                <?php if (!empty($speakerName)) { ?>
+                <?php if (!empty($speakerlist)) { ?>
                     <div>
-                        <p>Speaker: <strong><?php echo $speakerName; ?></strong></p>
+                        <p>Speakers:</p>
+                        <ol>
+                            <?php foreach ($speakerlist as  $speaker) { ?>
+                                <li> <strong><?php echo $speaker; ?></strong></li>
+                            <?php } ?>
+                        </ol>
                     </div>
                 <?php } ?>
 
@@ -65,13 +67,16 @@ require_once "ViewEvent.php";?>
                         <input type="text" name="quantity" value="1" size="2" />
                         <input type="submit" value="View page"
                                class="btnAddAction" />
-                <hr>
+
 
                     </div>
 
                 </form>
+                <hr id="despartitor">
+                <br>
             </div>
             <?php
+
         }
     }
     ?>

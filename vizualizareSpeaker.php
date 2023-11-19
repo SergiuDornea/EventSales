@@ -3,7 +3,8 @@
 <head>
     <title>Vizualizare Inregistrari SPEAKER</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link href="style.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <nav class="navtop">
