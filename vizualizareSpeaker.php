@@ -58,7 +58,7 @@ if ($result = $mysqli->query("SELECT * FROM speakers ORDER BY id "))
 }
 // eroare in caz de insucces in interogare
 else
-{ echo "Error: " . $mysqli->error(); }
+{ echo "Error: " . $mysqli->error; }
 // se inchide
 $mysqli->close();
 ?>

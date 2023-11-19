@@ -28,10 +28,14 @@ if (!isset($_SESSION['loggedin'])) {
   
     <p>Bine ati revenit, <?=$_SESSION['name']?>!</p>
     <div class = "crud">
+        <p>Events : <a href="vizualizareEvenimente.php">manage events here</a></p>
         <p>Users : <a href="vizualizareUser.php">manage users here</a></p>
         <p>Tickets : <a href="vizualizareTichete.php">manage tickets here</a></p>
+        <p>Payments : <a href="vizualizarePayments.php">manage payments here</a></p>
         <p>Speakers : <a href="vizualizareSpeaker.php">manage speakers here</a></p>
-
+        <p>Bookings : <a href="vizualizareBookings.php">manage bookings here</a></p>
+        <p>Sponsors : <a href="Vizualizare_sponsori.php">manage sponsors here</a></p>
+        <p>Partners : <a href="Vizualizare_parteneri.php">manage partners here</a></p>
     </div>
 
 </div>
