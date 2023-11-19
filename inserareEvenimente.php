@@ -26,7 +26,10 @@ global $mysqli;
             {
                 $stmt->bind_param("sssssii", $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor);
                 $stmt->execute();
+                $id = $stmt->insert_id;
                 $stmt->close();
+
+                generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor);
             }
             else
             {
@@ -38,6 +41,31 @@ global $mysqli;
 
     // Se inchide conexiunea mysqli:
     $mysqli->close();
+
+
+    function generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor) {
+        // Generare HTML pentru pagina web
+        $html = "<html>";
+        $html .= "<head><title>$titlu</title></head>";
+        $html .= "<body>";
+        $html .= "<h1>$titlu</h1>";
+        $html .= "<p>Descriere: $descriere</p>";
+        $html .= "<p>Locatie: $locatie</p>";
+        $html .= "<p>Data: $date</p>";
+        $html .= "<p>Contact: $contact</p>";
+        $html .= "<p>ID Partener: $id_partener</p>";
+        $html .= "<p>ID Sponsor: $id_sponsor</p>";
+        $html .= "</body>";
+        $html .= "</html>";
+    
+        // Salveaza continutul in fisier (poti ajusta calea daca este necesar)
+        $filename = "eveniment_$id.html";
+        file_put_contents($filename, $html);
+    
+        // Poti adauga si alte actiuni, cum ar fi redirectionarea catre pagina generata
+        header("Location: $filename");
+        exit();
+    }
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
