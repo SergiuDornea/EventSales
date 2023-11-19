@@ -19,9 +19,9 @@ if (!isset($_SESSION['loggedin'])) {
 <body class="loggedin">
 <nav class="navtop">
     <div>
-        <h1>PST-EVENTS - user</h1>
-        <a href="profile.php"><i class="fas fa-usercircle"></i>Profile</a>
+        <h1>PST-EVENTS - user</h1><a href="profile.php"><i class="fas fa-usercircle"></i>Profile</a>
         <a href="logout.php"><i class="fas fa-sign-outalt"></i>Logout</a>
+
     </div>
 </nav>
 <div class="content">
