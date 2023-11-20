@@ -10,23 +10,23 @@ class ViewEvent extends DBController
         $productResult = $this->getDBResult($query);
         return $productResult;
     }
-//    function getMemberCartItem($member_id)
-//    {
-//        $query = "SELECT tbl_product.*, tbl_cart.id as
-//cart_id,tbl_cart.quantity FROM tbl_product, tbl_cart WHERE
-// tbl_product.id = tbl_cart.product_id AND tbl_cart.member_id = ?";
-//
-//
-// $params = array(
-//     array(
-//         "param_type" => "i",
-//         "param_value" => $member_id
-//     )
-// );
+    function getMemberCartItem($member_id)
+    {
+        $query = "SELECT tickets.*, tickets.id as cart_id, cos.quantity FROM tickets, cos WHERE tickets.id = cos.ID_TICKET AND cos.ID_USER = ?";
 
-// $cartResult = $this->getDBResult($query, $params);
-// return $cartResult;
-// }
+        $params = array(
+            array(
+                "param_type" => "i",
+                "param_value" => $member_id
+            )
+        );
+
+        $cartResult = $this->getDBResult($query, $params);
+        return $cartResult;
+    }
+
+Message #general
+
     function getEventByID($eventId)
     {
         $query = "SELECT * FROM events WHERE ID=?";
