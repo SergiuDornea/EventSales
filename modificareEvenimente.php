@@ -38,7 +38,7 @@ global $mysqli;
                         $stmt->close();
                         
                         // Apelam functia de modificare a paginii generate automat, dupa ce s-au modificat cu succes datele:
-                        modifyEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor);
+                        modifyEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor, $mysqli);
                         echo "Evenimentul a fost modificat cu succes! <br> Vezi pagina modificata: <a href=\"eveniment_$id.html\">AICI</a>";
                     }
                     else
@@ -58,7 +58,11 @@ global $mysqli;
 ?>
 
 <?php
-    function modifyEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor) {
+    function modifyEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor, $mysqli) {
+        // Obține numele partenerului și sponsorului din baza de date
+        $numePartener = getNumePartener($id_partener, $mysqli);
+        $numeSponsor = getNumeSponsor($id_sponsor, $mysqli);
+    
         // Generare HTML pentru pagina web
         $html = "<html>";
         $html .= "<head>";
@@ -72,29 +76,64 @@ global $mysqli;
         $html .= "<p>Locatie: $locatie</p>";
         $html .= "<p>Data: $date</p>";
         $html .= "<p>Contact: $contact</p>";
-        $html .= "<p>ID Partener: $id_partener</p>";
-        $html .= "<p>ID Sponsor: $id_sponsor</p>";
-
+        $html .= "<p>Partener: $numePartener</p>";
+        $html .= "<p>Sponsor: $numeSponsor</p>";
+    
         // Adaugă formularul cu butonul pentru redirectionare către cos.php
-        $html .= '<form method="post" action="cos.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>';
+        if (!isset($_SESSION['loggedin'])) {
+            $html .= '<form method="post" action="login.html"';
+        } else {
+            $html .= '<form method="post" action="cos.php"';
+        }
+    
         $html .= '<input type="submit" value="Cumpara Bilet" />';
         $html .= '</form>';
-
+    
         // Adaugă formularul cu butonul pentru redirectionare către index.php
         $html .= '<form method="post" action="index.php">';
         $html .= '<input type="submit" value="Back to Events" />';
         $html .= '</form>';
-
+    
         $html .= "</body>";
         $html .= "</html>";
     
-        // Salveaza continutul in fisier 
+        // Salvează conținutul în fișier
         $filename = "eveniment_$id.html";
         file_put_contents($filename, $html);
+    }
     
-        // redirectionarea catre pagina generata nu ne trebuie cat timp avem link mai sus
-        // header("Location: $filename");
-        // exit();
+    
+    // Funcție pentru a obține numele partenerului
+    function getNumePartener($id_partener, $mysqli) {
+        $nume = '';
+        $sql = "SELECT nume FROM Parteneri WHERE id = ?";
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param("i", $id_partener);
+            $stmt->execute();
+            $stmt->bind_result($nume);
+            $stmt->fetch();
+            $stmt->close();
+            return $nume;
+        } else {
+            return "Nume Partener Indisponibil";
+        }
+    }
+    
+    // Funcție pentru a obține numele sponsorului
+    function getNumeSponsor($id_sponsor, $mysqli) 
+    {
+        $nume = '';
+        $sql = "SELECT nume FROM Sponsori WHERE id = ?";
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param("i", $id_sponsor);
+            $stmt->execute();
+            $stmt->bind_result($nume);
+            $stmt->fetch();
+            $stmt->close();
+            return $nume;
+        } else {
+            return "Nume Sponsor Indisponibil";
+        }
     }
 ?>
 <html>

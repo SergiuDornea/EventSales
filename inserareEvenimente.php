@@ -1,4 +1,5 @@
 <?php
+require_once "ViewEvent.php";
 global $mysqli;
     include("conectare.php");
     $error = "";
@@ -12,6 +13,12 @@ global $mysqli;
         $contact = htmlentities($_POST['contact'], ENT_QUOTES);
         $id_partener = htmlentities($_POST['id_partener'], ENT_QUOTES);
         $id_sponsor = htmlentities($_POST['id_sponsor'], ENT_QUOTES);
+
+        $viewEvent = new ViewEvent();
+        $parteneri = array();
+        $sponsori = array();
+
+
 
         // Verificam daca sunt completate:
         if ($titlu == '' || $descriere == ''|| $locatie == '' || $date == ''|| $contact == '' || $id_partener == '' || $id_sponsor == '')
@@ -32,7 +39,7 @@ global $mysqli;
                 $stmt->close();
 
                 // Apelez functia de generare Pagina Eveniment, dupa inserarea cu succes a datelor:
-                generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor);
+                generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor, $mysqli);
                 echo "Evenimentul a fost inserat cu succes! <br> Vezi pagina generata: <a href=\"eveniment_$id.html\">AICI</a>";
             }
             else
@@ -47,8 +54,12 @@ global $mysqli;
     $mysqli->close();
 
 
-    function generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor) {
-        // Generare HTML pentru pagina web, '.=' e operator de atribuire compus, adauga continutul la variabila, nu il inlocuieste! (concateneaza practic)
+    function generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor, $mysqli) {
+        // Obține numele partenerului și sponsorului din baza de date
+        $numePartener = getNumePartener($id_partener, $mysqli);
+        $numeSponsor = getNumeSponsor($id_sponsor, $mysqli);
+    
+        // Generare HTML pentru pagina web
         $html = "<html>";
         $html .= "<head>";
         $html .= "<meta name='viewport' content='width=device-width, initial-scale=1'>";
@@ -61,30 +72,64 @@ global $mysqli;
         $html .= "<p>Locatie: $locatie</p>";
         $html .= "<p>Data: $date</p>";
         $html .= "<p>Contact: $contact</p>";
-        $html .= "<p>ID Partener: $id_partener</p>";
-        $html .= "<p>ID Sponsor: $id_sponsor</p>";
-
+        $html .= "<p>Partener: $numePartener</p>";
+        $html .= "<p>Sponsor: $numeSponsor</p>";
+    
         // Adaugă formularul cu butonul pentru redirectionare către cos.php
-        $html .= '<form method="post" action="cos.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>';
+        if (!isset($_SESSION['loggedin'])) {
+            $html .= '<form method="post" action="login.html"';
+        } else {
+            $html .= '<form method="post" action="cos.php"';
+        }
+    
         $html .= '<input type="submit" value="Cumpara Bilet" />';
         $html .= '</form>';
-
+    
         // Adaugă formularul cu butonul pentru redirectionare către index.php
         $html .= '<form method="post" action="index.php">';
         $html .= '<input type="submit" value="Back to Events" />';
         $html .= '</form>';
-
+    
         $html .= "</body>";
         $html .= "</html>";
     
-        // Salveaza continutul in fisier 
+        // Salvează conținutul în fișier
         $filename = "eveniment_$id.html";
         file_put_contents($filename, $html);
+    }
     
-        // redirectionarea catre pagina generata nu ne trebuie cat timp avem link mai sus
-
-        // header("Location: $filename");
-        // exit();
+    
+    // Funcție pentru a obține numele partenerului
+    function getNumePartener($id_partener, $mysqli) {
+        $nume = '';
+        $sql = "SELECT nume FROM Parteneri WHERE id = ?";
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param("i", $id_partener);
+            $stmt->execute();
+            $stmt->bind_result($nume);
+            $stmt->fetch();
+            $stmt->close();
+            return $nume;
+        } else {
+            return "Nume Partener Indisponibil";
+        }
+    }
+    
+    // Funcție pentru a obține numele sponsorului
+    function getNumeSponsor($id_sponsor, $mysqli) 
+    {
+        $nume = '';
+        $sql = "SELECT nume FROM Sponsori WHERE id = ?";
+        if ($stmt = $mysqli->prepare($sql)) {
+            $stmt->bind_param("i", $id_sponsor);
+            $stmt->execute();
+            $stmt->bind_result($nume);
+            $stmt->fetch();
+            $stmt->close();
+            return $nume;
+        } else {
+            return "Nume Sponsor Indisponibil";
+        }
     }
 ?>
 
