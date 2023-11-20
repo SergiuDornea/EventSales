@@ -97,7 +97,7 @@ require_once "ViewEvent.php";?>
                 <?php } ?>
 
 
-                        <input type="text" name="quantity" value="1" size="2" />
+                        
                         <input type="submit" value="View page"
                                class="btnAddAction" />
 
