@@ -30,6 +30,7 @@ global $mysqli;
                 $stmt->close();
 
                 generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor);
+                echo "Evenimentul a fost inserat cu succes! <br> Vezi aici pagina generata: <a href=\"eveniment_$id$titlu.html\">aici</a>.";
             }
             else
             {
@@ -59,16 +60,27 @@ global $mysqli;
         $html .= "<p>Contact: $contact</p>";
         $html .= "<p>ID Partener: $id_partener</p>";
         $html .= "<p>ID Sponsor: $id_sponsor</p>";
+
+        // Adaugă formularul cu butonul pentru redirectionare către cos.php
+        $html .= '<form method="post" action="cos.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>">';
+        $html .= '<input type="submit" value="Cumpara Bilet" />';
+        $html .= '</form>';
+
+        // Adaugă formularul cu butonul pentru redirectionare către index.php
+        $html .= '<form method="post" action="index.php">';
+        $html .= '<input type="submit" value="Back to Events" />';
+        $html .= '</form>';
+
         $html .= "</body>";
         $html .= "</html>";
     
         // Salveaza continutul in fisier (poti ajusta calea daca este necesar)
-        $filename = "eveniment_$id$titlu.html";
+        $filename = "eveniment_$id.html";
         file_put_contents($filename, $html);
     
         // Poti adauga si alte actiuni, cum ar fi redirectionarea catre pagina generata
-        header("Location: $filename");
-        exit();
+        // header("Location: $filename");
+        // exit();
     }
 ?>
 
