@@ -47,6 +47,7 @@
                         echo "<td>" . $row->ID_SPONSOR . "</td>";
                         echo "<td><a href='modificareEvenimente.php?id=" . $row->ID . "'>Modificare</a></td>";
                         echo "<td><a href='stergereEvenimente.php?id=" .$row->ID . "'>Stergere</a></td>";
+                        echo "<td><a href='sendEmail.php?id=" .$row->ID . "'>Trimite invitetie prin EMAIL</a></td>";
                         echo "</tr>";
                     }
 
