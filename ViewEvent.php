@@ -128,4 +128,6 @@ class ViewEvent extends DBController
 
         $this->updateDB($query, $params);
     }
+
+    
 }
