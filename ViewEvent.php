@@ -27,14 +27,14 @@ class ViewEvent extends DBController
 // $cartResult = $this->getDBResult($query, $params);
 // return $cartResult;
 // }
-    function getProductByCode($product_code)
+    function getEventByID($eventId)
     {
-        $query = "SELECT * FROM events WHERE code=?";
+        $query = "SELECT * FROM events WHERE ID=?";
 
         $params = array(
             array(
-                "param_type" => "s",
-                "param_value" => $product_code
+                "param_type" => "i",
+                "param_value" => $eventId
             )
         );
 

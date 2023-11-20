@@ -10,7 +10,7 @@ require 'src/SMTP.php';
 
 
 // fcunctie de trimitere invitatie prin email
-function sendEmail($to, $subject, $message)
+function sendEmail($to, $subject, $message, $fromAddres, $formName)
 {
     $mail = new PHPMailer(true);
 
@@ -26,7 +26,7 @@ function sendEmail($to, $subject, $message)
 
 
         // Recipients
-        $mail->setFrom('your_email@example.com', 'Your Name');
+        $mail->setFrom($fromAddres, $formName);
         $mail->addAddress($to);
 
         // Content
@@ -64,11 +64,13 @@ $mysqli->close();
 // Compose the email subject and body
 $subject = "Invitation to Event";
 $message = "You are invited to the event with ID: $eventID. Please join us!";
-
+//TODO replace hardcoded name and address
+$formName = 'admin';
+$formAddress = 'admin@gmail.com';
 // Send email to each user
 foreach ($emails as $email)
 {
-    sendEmail($email, $subject, $message);
+    sendEmail($email, $subject, $message,$formAddress, $formName);
 }
 
 echo "Invitations sent successfully!";
