@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "ViewEvent.php";?>
 <HTML>
 <HEAD>
@@ -8,9 +9,28 @@ require_once "ViewEvent.php";?>
     <nav class="navtop">
         <div>
             <h1>PST-EVENTS : evenimente</h1>
-            <a href="login.html">Log in</a>
-            <a href="logout.php"><i class="fas fa-sign-outalt"></i>Log out</a>
+            <?php
+                if (!isset($_SESSION['loggedin'])) {
+                    echo '<a href="login.html">Log in</a>';
+                }
+            ?>
+            <!-- <a href="login.html">Log in</a> -->
+
+            <?php
+                if (isset($_SESSION['loggedin'])) {
+                    echo '<a href="logout.php">Log out</a>';
+                }
+            ?>
+            <!-- <a href="logout.php"><i class="fas fa-sign-outalt"></i>Log out</a> -->
             <a href="index.php" type="disable">HOME</a>
+            <?php
+                if ($_SESSION['isAdmin'] != 0) {
+                    echo '<a href="adminHome.php">Profil</a>';
+                }
+                else {
+                    echo '<a href="userHome.php">Profil</a>';
+                }
+            ?>
         </div>
     </nav>
 </HEAD>

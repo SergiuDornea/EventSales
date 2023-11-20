@@ -43,6 +43,7 @@ if ($stmt = $conectare->prepare('SELECT id, password, isAdmin FROM users WHERE u
                 $_SESSION['loggedin'] = TRUE;
                 $_SESSION['name'] = $_POST['username'];
                 $_SESSION['id'] = $id;
+                $_SESSION['isAdmin'] = $isAdmin;
                 echo 'Bine ati venit admin ' . $_SESSION['name'] . '!';
                 header('Location: adminHome.php');
 
@@ -55,6 +56,7 @@ if ($stmt = $conectare->prepare('SELECT id, password, isAdmin FROM users WHERE u
                 $_SESSION['loggedin'] = TRUE;
                 $_SESSION['name'] = $_POST['username'];
                 $_SESSION['id'] = $id;
+                $_SESSION['isAdmin'] = $isAdmin;
                 echo 'Bine ati venit user ' . $_SESSION['name'] . '!';
                 header('Location: userHome.php');
 

@@ -30,7 +30,7 @@ global $mysqli;
                 $stmt->close();
 
                 generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor);
-                echo "Evenimentul a fost inserat cu succes! <br> Vezi aici pagina generata: <a href=\"eveniment_$id$titlu.html\">aici</a>.";
+                echo "Evenimentul a fost inserat cu succes! <br> Vezi pagina generata: <a href=\"eveniment_$id.html\">AICI</a>";
             }
             else
             {
