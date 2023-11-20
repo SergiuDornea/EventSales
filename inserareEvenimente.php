@@ -26,9 +26,12 @@ global $mysqli;
             {
                 $stmt->bind_param("sssssii", $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor);
                 $stmt->execute();
+
+                // $stmt->insert_id preia ultimul ID generat automat prin AUTO_INCREMENT:
                 $id = $stmt->insert_id;
                 $stmt->close();
 
+                // Apelez functia de generare Pagina Eveniment, dupa inserarea cu succes a datelor:
                 generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor);
                 echo "Evenimentul a fost inserat cu succes! <br> Vezi pagina generata: <a href=\"eveniment_$id.html\">AICI</a>";
             }
@@ -45,7 +48,7 @@ global $mysqli;
 
 
     function generateEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor) {
-        // Generare HTML pentru pagina web
+        // Generare HTML pentru pagina web, '.=' e operator de atribuire compus, adauga continutul la variabila, nu il inlocuieste! (concateneaza practic)
         $html = "<html>";
         $html .= "<head>";
         $html .= "<meta name='viewport' content='width=device-width, initial-scale=1'>";
@@ -74,11 +77,12 @@ global $mysqli;
         $html .= "</body>";
         $html .= "</html>";
     
-        // Salveaza continutul in fisier (poti ajusta calea daca este necesar)
+        // Salveaza continutul in fisier 
         $filename = "eveniment_$id.html";
         file_put_contents($filename, $html);
     
-        // Poti adauga si alte actiuni, cum ar fi redirectionarea catre pagina generata
+        // redirectionarea catre pagina generata nu ne trebuie cat timp avem link mai sus
+
         // header("Location: $filename");
         // exit();
     }

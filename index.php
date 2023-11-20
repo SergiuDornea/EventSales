@@ -10,26 +10,38 @@ require_once "ViewEvent.php";?>
         <div>
             <h1>PST-EVENTS : evenimente</h1>
             <?php
+                // Daca nu este logat, afiseaza DOAR link catre pagina de login:
                 if (!isset($_SESSION['loggedin'])) {
                     echo '<a href="login.html">Log in</a>';
                 }
             ?>
+
             <!-- <a href="login.html">Log in</a> -->
 
             <?php
+                // Daca este logat, afiseaza DOAR link catre pagina de logout:
                 if (isset($_SESSION['loggedin'])) {
                     echo '<a href="logout.php">Log out</a>';
                 }
             ?>
             <!-- <a href="logout.php"><i class="fas fa-sign-outalt"></i>Log out</a> -->
+
             <a href="index.php" type="disable">HOME</a>
+
             <?php
-                if ($_SESSION['isAdmin'] != 0) {
-                    echo '<a href="adminHome.php">Profil</a>';
+                // Aici are treaba doar cu utilizatorii logati:
+                if (isset($_SESSION['loggedin']))
+                {
+                    // Daca este admin, link-ul PROFIL merge catre adminHome.php
+                    if ($_SESSION['isAdmin'] != 0) {
+                        echo '<a href="adminHome.php">Profil</a>';
+                    }
+                    // Daca este user, link-ul PROFIL merge catre userHome.php
+                    else {
+                        echo '<a href="userHome.php">Profil</a>';
+                    }
                 }
-                else {
-                    echo '<a href="userHome.php">Profil</a>';
-                }
+                // !!daca apar erori in index cand nu esti logat, aici trebe umblat
             ?>
         </div>
     </nav>
@@ -56,7 +68,7 @@ require_once "ViewEvent.php";?>
                         <p> Data: <strong><?php echo $events_array[$key]["date"];
                             ?></strong> </p>
                     </div>
-<!--                // verifica daca exista un speaker atribuit pt id-ul eventului in tabela bookings-->
+                <!--// verifica daca exista un speaker atribuit pt id-ul eventului in tabela bookings-->
                 <?php
                 $speakerlist = array();
                 if (!empty($bookings_array)) {
