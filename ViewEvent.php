@@ -13,7 +13,7 @@ class ViewEvent extends DBController
 
     function getMemberCartItem($member_id)
     {
-        $query = "SELECT tickets.*, tickets.id as cart_id, cos.quantity FROM tickets, cos WHERE tickets.id = cos.ID_TICKET AND cos.ID_USER = ?";
+        $query = "SELECT tickets.*, cos.ID as cos_id, cos.quantity FROM tickets, cos WHERE tickets.ID = cos.ID_TICKET AND cos.ID_USER = ?";
 
         $params = array(
             array(
@@ -28,7 +28,7 @@ class ViewEvent extends DBController
 
     function getProductByCode($product_code)
     {
-        $query = "SELECT * FROM events WHERE code=?";
+        $query = "SELECT * FROM tickets WHERE code=?";
 
         $params = array(
             array(
@@ -42,7 +42,7 @@ class ViewEvent extends DBController
     }
     function getCartItemByProduct($product_id, $member_id)
     {
-        $query = "SELECT * FROM events WHERE product_id = ? AND member_id = ?";
+        $query = "SELECT * FROM cos WHERE ID_TICKET = ? AND ID_USER = ?";
 
         $params = array(
             array(
@@ -62,7 +62,7 @@ class ViewEvent extends DBController
 
     function addToCart($product_id, $quantity, $member_id)
     {
-        $query = "INSERT INTO events (product_id, quantity, member_id) VALUES (?, ?, ?)";
+        $query = "INSERT INTO cos (ID_TICKET, quantity, ID_USER) VALUES (?, ?, ?)";
 
         $params = array(
             array(
@@ -84,7 +84,7 @@ class ViewEvent extends DBController
 
     function updateCartQuantity($quantity, $cart_id)
     {
-        $query = "UPDATE events SET quantity = ? WHERE id= ?";
+        $query = "UPDATE cos SET quantity = ? WHERE ID = ?";
 
         $params = array(
             array(
@@ -103,7 +103,7 @@ class ViewEvent extends DBController
 
     function deleteCartItem($cart_id)
     {
-        $query = "DELETE FROM events WHERE id = ?";
+        $query = "DELETE FROM cos WHERE id = ?";
 
         $params = array(
             array(
@@ -114,10 +114,10 @@ class ViewEvent extends DBController
 
         $this->updateDB($query, $params);
     }
-    
+
     function emptyCart($member_id)
     {
-        $query = "DELETE FROM events WHERE member_id = ?";
+        $query = "DELETE FROM cos WHERE ID_USER = ?";
 
         $params = array(
             array(

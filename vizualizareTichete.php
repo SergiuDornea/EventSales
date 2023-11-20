@@ -31,7 +31,7 @@
                     echo "<table border='1' cellpadding='10'>";
 
                     // Antetul tabelului:
-                    echo "<tr><th>ID</th><th>Pret</th><th>Status</th><th>ID User</th><th>ID Payment</th><th>ID Eveniment</th><th></th><th></th></tr>";
+                    echo "<tr><th>ID</th><th>Pret</th><th>Status</th><th>Name</th><th>Quantity</th><th>Code</th><th>ID User</th><th>ID Payment</th><th>ID Eveniment</th><th></th><th></th></tr>";
                     
                     while ($row = $result->fetch_object())
                     {
@@ -40,6 +40,9 @@
                         echo "<td>" . $row->ID . "</td>";
                         echo "<td>" . $row->price . "</td>";
                         echo "<td>" . $row->status . "</td>";
+                        echo "<td>" . $row->name . "</td>";
+                        echo "<td>" . $row->quantity . "</td>";
+                        echo "<td>" . $row->code . "</td>";
                         echo "<td>" . $row->ID_USER . "</td>";
                         echo "<td>" . $row->ID_PAYMENT . "</td>";
                         echo "<td>" . $row->ID_EVENT . "</td>";

@@ -10,9 +10,11 @@ global $mysqli;
         $id_user = htmlentities($_POST['id_user'], ENT_QUOTES);
         $id_payment = htmlentities($_POST['id_payment'], ENT_QUOTES);
         $id_event = htmlentities($_POST['id_event'], ENT_QUOTES);
-
+        $name = htmlentities($_POST['name'], ENT_QUOTES);    
+        $quantity = htmlentities($_POST['quantity'], ENT_QUOTES);
+        $code = htmlentities($_POST['code'], ENT_QUOTES);
         // Verificam daca sunt completate:
-        if ($price == '' || $status == ''|| $id_user == ''|| $id_payment == '' || $id_event == '')
+        if ($price == '' || $status == ''|| $id_user == ''|| $id_payment == '' || $id_event == '' || $name == '' || $quantity == '' || $code == '')
         {
             // Daca sunt goale se afiseaza un mesaj:
             $error = 'ERROR: Campuri goale!';
@@ -20,9 +22,9 @@ global $mysqli;
         else
         {
             // Facem INSERT:
-            if ($stmt = $mysqli->prepare("INSERT into TICKETS (price, status, id_user, id_payment, id_event) VALUES (?, ?, ?, ?, ?)"))
+            if ($stmt = $mysqli->prepare("INSERT into TICKETS (price, status, id_user, id_payment, id_event, name, quantity, code) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"))
             {
-                $stmt->bind_param("dsiii", $price, $status, $id_user, $id_payment, $id_event);
+                $stmt->bind_param("dsiiisis", $price, $status, $id_user, $id_payment, $id_event, $name, $quantity, $code);
                 $stmt->execute();
                 $stmt->close();
             }
@@ -61,6 +63,9 @@ global $mysqli;
             <div>
                 <strong>Pret: </strong> <input type="number" step="0.01" min="0" name="price" value=""/><br/>
                 <strong>Status: </strong> <input type="text" name="status" value=""/><br/>
+                <strong>Name: </strong> <input type="text" name="name" value=""/><br/>
+                <strong>Quantity: </strong> <input type="text" name="quantity" value=""/><br/>
+                <strong>Code: </strong> <input type="text" name="code" value=""/><br/>
                 <strong>ID User: </strong> <input type="number" name="id_user" value=""/><br/>
                 <strong>ID Payment: </strong> <input type="number" name="id_payment" value=""/><br/>
                 <strong>ID Eveniment: </strong> <input type="number" name="id_event" value=""/><br/>

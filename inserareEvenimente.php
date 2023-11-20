@@ -62,7 +62,7 @@ global $mysqli;
         $html .= "<p>ID Sponsor: $id_sponsor</p>";
 
         // Adaugă formularul cu butonul pentru redirectionare către cos.php
-        $html .= '<form method="post" action="cos.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>">';
+        $html .= '<form method="post" action="cos.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>';
         $html .= '<input type="submit" value="Cumpara Bilet" />';
         $html .= '</form>';
 

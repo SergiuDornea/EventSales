@@ -19,9 +19,12 @@ global $mysqli;
                 $id_user = htmlentities($_POST['id_user'], ENT_QUOTES);
                 $id_payment = htmlentities($_POST['id_payment'], ENT_QUOTES);
                 $id_event = htmlentities($_POST['id_event'], ENT_QUOTES);
+                $name = htmlentities($_POST['name'], ENT_QUOTES);    
+                $quantity = htmlentities($_POST['quantity'], ENT_QUOTES);
+                $code = htmlentities($_POST['code'], ENT_QUOTES);
 
                 // Verificam ca datele sa nu fie goale:
-                if ($price == '' || $status == ''|| $id_user == ''|| $id_payment == '' || $id_event == '')
+                if ($price == '' || $status == ''|| $id_user == ''|| $id_payment == '' || $id_event == '' || $name == '' || $quantity == '' || $code == '')
                 {
                     // Daca sunt goale afisam mesaj de eroare:
                     echo "<div>ERROR: Completati campurile obligatorii!</div>";
@@ -29,9 +32,9 @@ global $mysqli;
                 else
                 {
                     // Daca nu sunt erori, se face UPDATE:
-                    if ($stmt = $mysqli->prepare("UPDATE tickets SET price=?, status=?, ID_USER=?, ID_PAYMENT=?, ID_EVENT=? WHERE ID ='".$id."'"))
+                    if ($stmt = $mysqli->prepare("UPDATE tickets SET price=?, status=?, ID_USER=?, ID_PAYMENT=?, ID_EVENT=?, name=?, quantity=?, code=? WHERE ID ='".$id."'"))
                     {
-                        $stmt->bind_param("dsiii", $price, $status, $id_user, $id_payment, $id_event);
+                        $stmt->bind_param("dsiiisis", $price, $status, $id_user, $id_payment, $id_event, $name, $quantity, $code);
                         $stmt->execute();
                         $stmt->close();
                     }
@@ -103,6 +106,9 @@ global $mysqli;
                 </p>
                 <strong>Pret: </strong> <input type="number" step="0.01" min="0" name="price" value="<?php echo $row->price; ?>"/><br/>
                 <strong>Status: </strong> <input type="text" name="status" value="<?php echo $row->status; ?>"/><br/>
+                <strong>Name: </strong> <input type="text" name="name" value="<?php echo $row->name; ?>"/><br/>
+                <strong>Quantity: </strong> <input type="text" name="quantity" value="<?php echo $row->quantity; ?>"/><br/>
+                <strong>Code: </strong> <input type="text" name="code" value="<?php echo $row->code; ?>"/><br/>
                 <strong>ID User: </strong> <input type="number" name="id_user" value="<?php echo $row->ID_USER; ?>"/><br/>
                 <strong>ID Payment: </strong> <input type="number" name="id_payment" value="<?php echo $row->ID_PAYMENT; ?>"/><br/>
                 <strong>ID Eveniment: </strong> <input type="number" name="id_event" value="<?php echo $row->ID_EVENT;}}} ?>"/><br/>
