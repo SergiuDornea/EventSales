@@ -79,16 +79,6 @@ global $mysqli;
         $html .= "<p>Partener: $numePartener</p>";
         $html .= "<p>Sponsor: $numeSponsor</p>";
     
-        // Adaugă formularul cu butonul pentru redirectionare către cos.php
-        if (!isset($_SESSION['loggedin'])) {
-            $html .= '<form method="post" action="login.html"';
-        } else {
-            $html .= '<form method="post" action="cos.php"';
-        }
-    
-        $html .= '<input type="submit" value="Cumpara Bilet" />';
-        $html .= '</form>';
-    
         // Adaugă formularul cu butonul pentru redirectionare către index.php
         $html .= '<form method="post" action="index.php">';
         $html .= '<input type="submit" value="Back to Events" />';
