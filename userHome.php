@@ -20,7 +20,7 @@ if (!isset($_SESSION['loggedin'])) {
 <body class="loggedin">
 <nav class="navtop">
     <div>
-        <h1>PST-EVENTS - user</h1>
+        <h1>PST-EVENTS - user - PROFIL</h1>
         <a href="logout.php"><i class="fas fa-sign-outalt"></i>Logout</a>
         <a href="userHome.php">Home</a>
         <a href="index.php">Events</a>

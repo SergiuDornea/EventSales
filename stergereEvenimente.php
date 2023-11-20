@@ -15,6 +15,9 @@
             $stmt->bind_param("i", $id);
             $stmt->execute();
             $stmt->close();
+
+            // Apelăm funcția pentru ștergerea paginii generată automat
+            deleteGeneratedPage($id);
         }
         else
         {
@@ -24,4 +27,22 @@
         echo "<div>Inregistrarea a fost stearsa cu succes!</div>";
     }
     echo "<p><a href=\"vizualizareEvenimente.php\">Vizualizare Evenimente</a></p>";
+
+    // Funcție pentru ștergerea paginii generată automat
+    function deleteGeneratedPage($id) 
+    {
+        $filename = "eveniment_$id.html";
+
+        // Verificare dacă fișierul există înainte de ștergere
+        if (file_exists($filename)) 
+        {
+            // Șterge fișierul
+            unlink($filename);
+            echo "<div>Pagina generată a fost ștearsă cu succes!</div>";
+        } 
+        else 
+        {
+            echo "<div>Pagina generată nu există.</div>";
+        }
+    }
 ?>

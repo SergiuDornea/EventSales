@@ -36,6 +36,10 @@ global $mysqli;
                         $stmt->bind_param("sssssii", $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor);
                         $stmt->execute();
                         $stmt->close();
+                        
+                        // Apelam functia de modificare a paginii generate automat, dupa ce s-au modificat cu succes datele:
+                        modifyEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor);
+                        echo "Evenimentul a fost modificat cu succes! <br> Vezi pagina modificata: <a href=\"eveniment_$id.html\">AICI</a>";
                     }
                     else
                     {
@@ -53,6 +57,46 @@ global $mysqli;
     } 
 ?>
 
+<?php
+    function modifyEventPage($id, $titlu, $descriere, $locatie, $date, $contact, $id_partener, $id_sponsor) {
+        // Generare HTML pentru pagina web
+        $html = "<html>";
+        $html .= "<head>";
+        $html .= "<meta name='viewport' content='width=device-width, initial-scale=1'>";
+        $html .= "<link rel='stylesheet' href='style.css'>";
+        $html .= "<title>$titlu</title>";
+        $html .= "</head>";
+        $html .= "<body>";
+        $html .= "<h1>$titlu</h1>";
+        $html .= "<p>Descriere: $descriere</p>";
+        $html .= "<p>Locatie: $locatie</p>";
+        $html .= "<p>Data: $date</p>";
+        $html .= "<p>Contact: $contact</p>";
+        $html .= "<p>ID Partener: $id_partener</p>";
+        $html .= "<p>ID Sponsor: $id_sponsor</p>";
+
+        // Adaugă formularul cu butonul pentru redirectionare către cos.php
+        $html .= '<form method="post" action="cos.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>';
+        $html .= '<input type="submit" value="Cumpara Bilet" />';
+        $html .= '</form>';
+
+        // Adaugă formularul cu butonul pentru redirectionare către index.php
+        $html .= '<form method="post" action="index.php">';
+        $html .= '<input type="submit" value="Back to Events" />';
+        $html .= '</form>';
+
+        $html .= "</body>";
+        $html .= "</html>";
+    
+        // Salveaza continutul in fisier 
+        $filename = "eveniment_$id.html";
+        file_put_contents($filename, $html);
+    
+        // redirectionarea catre pagina generata nu ne trebuie cat timp avem link mai sus
+        // header("Location: $filename");
+        // exit();
+    }
+?>
 <html>
     <head>
         <title>
