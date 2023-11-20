@@ -58,7 +58,7 @@ if ($stmt = $conectare->prepare('SELECT id, password, isAdmin FROM users WHERE u
                 $_SESSION['id'] = $id;
                 $_SESSION['isAdmin'] = $isAdmin;
                 echo 'Bine ati venit user ' . $_SESSION['name'] . '!';
-                header('Location: userHome.php');
+                header('Location: index.php');
 
 
             }

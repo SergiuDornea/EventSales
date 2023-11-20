@@ -65,7 +65,8 @@ require_once "ViewEvent.php";?>
                             // Find all speakers information for the booked speakers
                             foreach ($speakers_array as $speaker) {
                                 if ($speaker["ID"] == $booking["ID_SPEAKER"]) {
-                                    array_push($speakerlist, $speaker["nume"]);
+                                    $full_name = $speaker["nume"] . ' ' . $speaker["prenume"];
+                                    array_push($speakerlist, $full_name);
                                 }
                             }
                         }
