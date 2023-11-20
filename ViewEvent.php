@@ -25,7 +25,7 @@ class ViewEvent extends DBController
         return $cartResult;
     }
 
-Message #general
+
 
     function getEventByID($eventId)
     {
