@@ -100,6 +100,13 @@ require_once "ViewEvent.php";?>
                         
                         <input type="submit" value="View page"
                                class="btnAddAction" />
+                <?php
+                // Add the form for adding to the cart
+                echo '<form method="post" action="cos.php?action=add&code=' . $events_array[$key]["ID"] . '">';
+                echo '<input type="hidden" name="event_id" value="' . $events_array[$key]["ID"] . '" />';
+                echo 'Quantity: <input type="number" name="quantity" value="1" min="1" />';
+                echo '<input type="submit" value="Add to Cart" />';
+                echo '</form>';?>
 
 
                     </div>
